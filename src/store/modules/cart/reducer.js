@@ -3,7 +3,7 @@ import produce from 'immer';
 export default function cart(state = [], action) {
   console.log('action ', action);
   switch (action.type) {
-    case '@cart/ADD_TO_CART':
+    case '@cart/ADD_SUCCESS':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.product.id);
         if (productIndex >= 0) {

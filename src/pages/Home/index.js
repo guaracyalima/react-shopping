@@ -19,13 +19,13 @@ class Home extends Component {
     this.setState({ products: data });
   }
 
-  handleAddProduct = product => {
+  handleAddProduct = id => {
     //const { dispatch } = this.props;
-    const { addToCart } = this.props;
+    const { addToCartRequest } = this.props;
 
     //dispatch({ type: 'ADD_TO_CART', product });
     //dispatch(CartActions.addToCart(product));
-    addToCart(product);
+    addToCartRequest(id);
   };
 
   render() {
@@ -42,7 +42,7 @@ class Home extends Component {
             <button
               type="button"
               onClick={() => {
-                this.handleAddProduct(p);
+                this.handleAddProduct(p.id);
               }}
             >
               <div>
