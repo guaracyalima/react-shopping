@@ -30,6 +30,7 @@ class Home extends Component {
 
   render() {
     const { products } = this.state;
+    const { amount } = this.props;
     return (
       <ProductList>
         {products.map(p => (
@@ -45,7 +46,7 @@ class Home extends Component {
               }}
             >
               <div>
-                <MdAddShoppingCart size={16} color="#ddd" />3
+                <MdAddShoppingCart size={16} color="#ddd" /> {amount[p.id] || 0}
               </div>
 
               <span>Adicionar ao carrinho</span>
@@ -57,8 +58,15 @@ class Home extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
 //permite que os dispatchs virem propriedades do compomenten
 //e sejam assessadas como sendo parte do props
 const mapDispatchToProps = dispatch =>
   bindActionCreators(CartActions, dispatch);
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
